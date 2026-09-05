@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1609px" viewBox="0 0 1920 1609" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Oval Copy@1x</title>
+    <defs>
+        <linearGradient x1="50.9267542%" y1="56.6899983%" x2="45.8886999%" y2="10.1833951%" id="linearGradient-1">
+            <stop stop-color="#BA5D48" offset="0%"></stop>
+            <stop stop-color="#2A0800" stop-opacity="0" offset="40.900896%"></stop>
+            <stop stop-color="#BA5D48" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-54.8%" y="-20.6%" width="209.7%" height="141.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="100" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Template" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="LANDING-PAGE-MAIN" transform="translate(0, -1079)" fill="url(#linearGradient-1)">
+            <g id="SECTION-PARALLAX-IMAGES" transform="translate(0, 1079)">
+                <ellipse id="Oval-Copy" filter="url(#filter-2)" transform="translate(959.9258, 771.205) rotate(41) translate(-959.9258, -771.205)" cx="959.925838" cy="771.205026" rx="273.5" ry="728"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

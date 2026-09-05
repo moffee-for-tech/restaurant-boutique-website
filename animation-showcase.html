@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Aurelle - Extracted Animations Showcase</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&family=Funnel+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <!-- Lenis Smooth Scroll -->
+  <link rel="stylesheet" href="./assets/css/lenis.css"/>
+  <script src="./assets/js/lenis.min.js"></script>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="./assets/js/gsap.min.js"></script>
+  <script src="./assets/js/ScrollTrigger.min.js"></script>
+
+  <!-- Aurelle Extracted Animations -->
+  <link rel="stylesheet" href="./animations/animations.css"/>
+
+  <style>
+    :root {
+      --bg-dark: #171513;
+      --bg-card: #201d1a;
+      --bg-elevated: #282421;
+      --text-main: #f3eeed;
+      --text-muted: #b8b0a9;
+      --accent: #ba6957;
+      --accent-soft: #e2c6bf;
+      --border: rgba(226, 198, 191, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Funnel Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background: rgba(23, 21, 19, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Funnel Display', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-badge {
+      font-size: 0.7rem;
+      font-family: 'Funnel Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(186, 105, 87, 0.2);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(186, 105, 87, 0.3);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-link-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link-btn:hover {
+      color: var(--text-main);
+    }
+
+    /* Hero */
+    .showcase-hero {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 1.5rem 4rem;
+      background: radial-gradient(circle at 50% 30%, rgba(186, 105, 87, 0.15) 0%, transparent 60%);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Funnel Display', Georgia, serif;
+      font-size: clamp(2.5rem, 5.5vw, 5rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Section Container */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-num {
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Funnel Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 1rem;
+    }
+
+    /* Showcase Cards Grid */
+    .demo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-preview-area {
+      background: var(--bg-dark);
+      border: 1px solid rgba(226, 198, 191, 0.08);
+      border-radius: 12px;
+      padding: 3rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
+      margin: 1.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.25rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-action:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Parallax Columns Demo */
+    .parallax-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .parallax-box {
+      height: 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .parallax-box img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      position: absolute;
+      top: -15%;
+      left: 0;
+    }
+
+    .parallax-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      z-index: 2;
+      background: rgba(23, 21, 19, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      border: 1px solid var(--border);
+    }
+
+    /* Code Snippet block */
+    pre {
+      background: #0e0d0c;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.85rem;
+      color: #e2c6bf;
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent-soft);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <a href="index.html" class="brand">
+      <span>Aurelle</span>
+      <span class="brand-badge">Extracted Animations</span>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-link-btn">← Back to Cloned Site</a>
+      <a href="./hotel/index.html" class="nav-link-btn">Hotel</a>
+      <a href="./relax/index.html" class="nav-link-btn">Spa & Relax</a>
+      <a href="./rooms-1/index.html" class="nav-link-btn">Rooms</a>
+      <button class="btn-action" onclick="replayPreloader()">⚡ Replay Preloader</button>
+    </div>
+  </nav>
+
+  <!-- Preloader Component (Replayable) -->
+  <div id="demo-preloader" class="aurelle-preloader" style="display: none;">
+    <div class="aurelle-preloader-content">
+      <div class="aurelle-preloader-title"><span>Welcome to Aurelle</span></div>
+      <div class="aurelle-preloader-image-box">
+        <img src="./assets/images/6900c8b2e316c973fe714d4d_pexels-charlotte-may-5824891.avif" alt="Aurelle Hotel Preview"/>
+      </div>
+    </div>
+    <div class="aurelle-preloader-bg"></div>
+  </div>
+
+  <!-- Fullscreen Navigation Menu Overlay Demo -->
+  <div id="demo-menu" class="aurelle-menu-overlay">
+    <div class="aurelle-menu-backdrop" onclick="toggleMenuDemo(false)"></div>
+    <div class="aurelle-menu-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-family: 'Funnel Display'; font-size: 1.5rem;">Aurelle Menu</span>
+        <button class="btn-action" onclick="toggleMenuDemo(false)" style="font-size: 1.2rem; padding: 0.4rem 1rem;">✕ Close</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin: auto 0;">
+        <a href="index.html" class="aurelle-menu-item">Home Overview</a>
+        <a href="./hotel/index.html" class="aurelle-menu-item">The Historic Hotel</a>
+        <a href="./rooms-1/index.html" class="aurelle-menu-item">Suites & Rooms</a>
+        <a href="./restaurant/index.html" class="aurelle-menu-item">Fine Dining & Lounge</a>
+        <a href="./relax/index.html" class="aurelle-menu-item">Wellness & Spa</a>
+        <a href="./booking/index.html" class="aurelle-menu-item">Reservations</a>
+      </div>
+      <div style="color: var(--text-muted); font-size: 0.9rem;">
+        12 Stonebridge Street, Prague 1 • +420 234 567 890
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Header -->
+  <header class="showcase-hero">
+    <div class="hero-eyebrow">
+      <div style="width: 8px; height: 8px; color: var(--accent);"><div class="dot-animation"></div></div>
+      <span>Aurelle Hotel Animation Suite</span>
+    </div>
+    <h1 class="hero-title">Extracted Animations & Interactions</h1>
+    <p class="hero-desc">
+      Every high-end transition, GSAP ScrollTrigger timeline, text split reveal, parallax effect, and micro-interaction extracted from the Aurelle template into a pure, modular library.
+    </p>
+    <div class="hero-buttons">
+      <button class="aurelle-btn" onclick="replayPreloader()">
+        <span class="aurelle-btn-text">Test Hero Preloader</span>
+        <span class="aurelle-btn-icon">▶</span>
+        <div class="aurelle-btn-bg"></div>
+      </button>
+      <button class="aurelle-btn" onclick="toggleMenuDemo(true)">
+        <span class="aurelle-btn-text">Open Glassmorphic Menu</span>
+        <span class="aurelle-btn-icon">☰</span>
+        <div class="aurelle-btn-bg"></div>
+      </button>
+      <a href="index.html" class="aurelle-btn" style="background: transparent; border: 1px solid var(--border);">
+        <span class="aurelle-btn-text">Browse Full Cloned Site</span>
+        <span class="aurelle-btn-icon">↗</span>
+        <div class="aurelle-btn-bg"></div>
+      </a>
+    </div>
+  </header>
+
+  <!-- Showcase Content -->
+  <main class="section-container">
+
+    <!-- 1. Text & Typography Reveals -->
+    <section class="demo-card">
+      <div class="section-num">Animation #01</div>
+      <h2 class="section-title">ScrollTrigger SplitText Typography Reveal</h2>
+      <p class="section-sub">
+        Animates words and sentences smoothly with staggered translateY and opacity transitions as the viewer scrolls into view.
+      </p>
+      
+      <div class="demo-preview-area">
+        <div style="text-align: center; max-width: 700px;">
+          <h2 id="split-text-target" data-anim-title="true" style="font-family: 'Funnel Display'; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; margin-bottom: 1rem;">
+            A boutique escape in timeless streets
+          </h2>
+          <p id="split-desc-target" style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7;">
+            Cozy interiors, warm tones, and thoughtful details that make every stay feel personal and unhurried.
+          </p>
+        </div>
+      </div>
+
+      <div class="demo-controls">
+        <button class="btn-action" onclick="replaySplitReveal()">Replay Typography Reveal</button>
+      </div>
+
+      <pre><code>// Pure GSAP Typography Reveal
+gsap.fromTo("#split-text-target", 
+  { y: 40, opacity: 0 }, 
+  { y: 0, opacity: 1, duration: 1.0, ease: "power3.out" }
+);</code></pre>
+    </section>
+
+    <!-- 2. Circular Image Ring / Floating CTA Gallery -->
+    <section class="demo-card">
+      <div class="section-num">Animation #02</div>
+      <h2 class="section-title">Circular Floating Image Ring</h2>
+      <p class="section-sub">
+        Concentric delicate circular rings with radial floating image nodes that gently breathe and counter-rotate.
+      </p>
+
+      <div class="demo-preview-area" style="padding: 4rem 1rem;">
+        <div class="aurelle-circle-gallery">
+          <div class="aurelle-circle-ring ring-1"></div>
+          <div class="aurelle-circle-ring ring-2"></div>
+          <div class="aurelle-circle-ring ring-3"></div>
+          
+          <div class="aurelle-circle-node" style="top: 2%; left: 45%;">
+            <img src="./assets/images/726c8953fa.avif" alt="Prague twilight"/>
+          </div>
+          <div class="aurelle-circle-node" style="top: 25%; right: 5%;">
+            <img src="./assets/images/8ef5a26384.avif" alt="Prague skyline"/>
+          </div>
+          <div class="aurelle-circle-node" style="bottom: 25%; right: 5%;">
+            <img src="./assets/images/68fb96bad8bcad3b3ccd8875_pexels-cottonbro-studio-3997980.avif" alt="Spa wellness"/>
+          </div>
+          <div class="aurelle-circle-node" style="bottom: 2%; left: 45%;">
+            <img src="./assets/images/3b8db86ca0.avif" alt="Fine dining"/>
+          </div>
+          <div class="aurelle-circle-node" style="bottom: 25%; left: 5%;">
+            <img src="./assets/images/68d7bcd5a25a3ad0669319ea_pexels-valeria-boltneva-827528.avif" alt="Cafe lounge"/>
+          </div>
+          <div class="aurelle-circle-node" style="top: 25%; left: 5%;">
+            <img src="./assets/images/6908ea3d19ea3e540ee5a598_pexels-cottonbro-6467621-1.avif" alt="Aurelle bar"/>
+          </div>
+
+          <div style="text-align: center; z-index: 5; pointer-events: none;">
+            <div style="font-family: 'Funnel Display'; font-size: 1.5rem; font-weight: 400;">Aurelle</div>
+            <div style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;">Atmosphere</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Infinite Marquee Ticker -->
+    <section class="demo-card">
+      <div class="section-num">Animation #03</div>
+      <h2 class="section-title">Infinite Marquee Ticker</h2>
+      <p class="section-sub">
+        Continuous smooth horizontal translation with dashes between phrases. Automatically pauses on mouse hover.
+      </p>
+
+      <div class="demo-preview-area" style="padding: 2.5rem 0; overflow: hidden;">
+        <div class="aurelle-marquee">
+          <div class="aurelle-marquee-track">
+            <span class="aurelle-marquee-item">Wellness <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Relax <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Atmosphere <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Hospitality <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Wellness <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Relax <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Atmosphere <span class="aurelle-marquee-dash"></span></span>
+            <span class="aurelle-marquee-item">Hospitality <span class="aurelle-marquee-dash"></span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Parallax Depth Scrolling -->
+    <section class="demo-card">
+      <div class="section-num">Animation #04</div>
+      <h2 class="section-title">Scrubbed Parallax Depth Movement</h2>
+      <p class="section-sub">
+        Scroll down to see small, medium, and large parallax images gliding inside their frame boundaries at differentiated velocities.
+      </p>
+
+      <div class="parallax-grid" style="margin-top: 2rem;">
+        <div class="parallax-box">
+          <img id="para-small" data-parallax-small="true" src="./assets/images/68e27880bc2f8e7f7de583f2_pexels-max-vakhtbovych-7031722.avif" alt="Small Parallax"/>
+          <div class="parallax-label">Small Parallax (±35px)</div>
+        </div>
+        <div class="parallax-box">
+          <img id="para-med" data-parallax-medium="true" src="./assets/images/68e278d113023b83990cd933_pexels-max-vakhtbovych-7227620.avif" alt="Medium Parallax"/>
+          <div class="parallax-label">Medium Parallax (±70px)</div>
+        </div>
+        <div class="parallax-box">
+          <img id="para-large" data-parallax-large="true" src="./assets/images/68e27849705bce25274bb540_pexels-max-vakhtbovych-6585751.avif" alt="Large Parallax"/>
+          <div class="parallax-label">Large Parallax (±120px)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Collapsible Accordions -->
+    <section class="demo-card">
+      <div class="section-num">Animation #05</div>
+      <h2 class="section-title">Collapsible Accordion FAQ</h2>
+      <p class="section-sub">
+        Smooth CSS height expansion paired with rotational chevron micro-animation.
+      </p>
+
+      <div style="max-width: 800px; margin: 2rem auto 0;">
+        <div class="aurelle-accordion-item is-open">
+          <div class="aurelle-accordion-header">
+            <h3 style="font-size: 1.15rem; font-weight: 400;">What are the check-in and check-out times?</h3>
+            <span class="aurelle-accordion-arrow">↓</span>
+          </div>
+          <div class="aurelle-accordion-body">
+            <p style="color: var(--text-muted);">
+              Check-in begins at 15:00, and check-out is until 11:00. Early check-in and late check-out can be arranged upon request depending on suite availability.
+            </p>
+          </div>
+        </div>
+
+        <div class="aurelle-accordion-item">
+          <div class="aurelle-accordion-header">
+            <h3 style="font-size: 1.15rem; font-weight: 400;">Is breakfast included with every room reservation?</h3>
+            <span class="aurelle-accordion-arrow">↓</span>
+          </div>
+          <div class="aurelle-accordion-body">
+            <p style="color: var(--text-muted);">
+              Yes, an artisan breakfast prepared with organic local ingredients is served each morning from 7:30 to 10:30 in the garden lounge.
+            </p>
+          </div>
+        </div>
+
+        <div class="aurelle-accordion-item">
+          <div class="aurelle-accordion-header">
+            <h3 style="font-size: 1.15rem; font-weight: 400;">Are spa rituals and wellness therapies available to non-guests?</h3>
+            <span class="aurelle-accordion-arrow">↓</span>
+          </div>
+          <div class="aurelle-accordion-body">
+            <p style="color: var(--text-muted);">
+              Non-hotel guests are welcomed by advance reservation for individual aromatherapy rituals, sauna sessions, and private relaxation packages.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Micro-Interactions & Hover Effects -->
+    <section class="demo-card">
+      <div class="section-num">Animation #06</div>
+      <h2 class="section-title">Interactive Micro-Animations</h2>
+      <p class="section-sub">
+        Magnetic sliding buttons, pulsing status indicators, and animated underline links.
+      </p>
+
+      <div class="demo-preview-area" style="gap: 2.5rem; flex-wrap: wrap;">
+        <!-- Button 1 -->
+        <a href="./booking/index.html" class="aurelle-btn">
+          <span class="aurelle-btn-text">Slide In Button</span>
+          <span class="aurelle-btn-icon">→</span>
+          <div class="aurelle-btn-bg"></div>
+        </a>
+
+        <!-- Pulsing Dot -->
+        <div style="display: flex; align-items: center; gap: 0.75rem; background: var(--bg-elevated); padding: 0.75rem 1.5rem; border-radius: 999px; border: 1px solid var(--border);">
+          <div style="width: 10px; height: 10px; color: #4ade80;">
+            <div class="dot-animation"></div>
+          </div>
+          <span style="font-size: 0.9rem;">Live Hotel Status: Open</span>
+        </div>
+
+        <!-- Animated Underline Link -->
+        <a href="./location/index.html" class="aurelle-link" style="font-size: 1.05rem;">
+          <span>Explore Prague Streets</span>
+          <div class="aurelle-link-line"></div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Aurelle Hotel Template Cloned &amp; Extracted • All 24 pages available locally</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="index.html">View Cloned Home</a> • 
+      <a href="./hotel/index.html">About Hotel</a> • 
+      <a href="./rooms-1/index.html">Rooms 1</a> • 
+      <a href="./relax/index.html">Relax</a> • 
+      <a href="./restaurant/index.html">Restaurant</a>
+    </p>
+  </footer>
+
+  <script src="./animations/aurelle-animations.js"></script>
+  <script>
+    // Initialize Showcase Animations
+    document.addEventListener('DOMContentLoaded', () => {
+      AurelleAnimations.initLenis();
+      AurelleAnimations.initParallaxImages();
+      AurelleAnimations.initAccordions();
+      AurelleAnimations.initCircularGallery('.aurelle-circle-gallery');
+    });
+
+    // Replay Preloader function
+    function replayPreloader() {
+      const p = document.getElementById('demo-preloader');
+      p.style.display = 'flex';
+      p.classList.remove('is-loaded');
+      AurelleAnimations.initPreloader({
+        preloaderSelector: '#demo-preloader',
+        titleSelector: '.aurelle-preloader-title span',
+        imageTriggerSelector: '.aurelle-preloader-image-box',
+        bgSelector: '.aurelle-preloader-bg'
+      });
+    }
+
+    // Replay Split reveal
+    function replaySplitReveal() {
+      gsap.fromTo("#split-text-target", 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.0, ease: "power3.out" }
+      );
+      gsap.fromTo("#split-desc-target", 
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.9, delay: 0.2, ease: "power3.out" }
+      );
+    }
+
+    // Toggle menu demo
+    function toggleMenuDemo(show) {
+      const menu = document.getElementById('demo-menu');
+      if (show) {
+        menu.classList.add('is-active');
+        gsap.fromTo(".aurelle-menu-item",
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "power3.out" }
+        );
+      } else {
+        menu.classList.remove('is-active');
+      }
+    }
+  </script>
+</body>
+</html>
